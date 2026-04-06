@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_X86
 //===-- X86ATTInstPrinter.cpp - AT&T assembly instruction printing --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -995,3 +996,5 @@ void X86_ATT_printInst(MCInst *MI, SStream *OS, void *info)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_X86

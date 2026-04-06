@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_ARM
 //===-- ARMDisassembler.cpp - Disassembler for ARM/Thumb ISA --------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -5761,3 +5762,5 @@ static DecodeStatus DecodeForVMRSandVMSR(MCInst *Inst, unsigned Val,
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_ARM

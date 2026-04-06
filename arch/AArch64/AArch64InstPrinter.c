@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_ARM64
 //==-- AArch64InstPrinter.cpp - Convert AArch64 MCInst to assembly syntax --==//
 //
 //                     The LLVM Compiler Infrastructure
@@ -3028,3 +3029,5 @@ void AArch64_post_printer(csh handle, cs_insn *flat_insn, char *insn_asm, MCInst
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_ARM64

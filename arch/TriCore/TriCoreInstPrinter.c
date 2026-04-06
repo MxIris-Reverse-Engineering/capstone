@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_TRICORE
 //===- TriCoreInstPrinter.cpp - Convert TriCore MCInst to assembly syntax -===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -484,5 +485,7 @@ void TriCore_LLVM_printInst(MCInst *MI, uint64_t Address, SStream *O)
 	printInstruction(MI, Address, O);
 	TriCore_set_access(MI);
 }
+
+#endif // CAPSTONE_HAS_TRICORE
 
 #endif // CAPSTONE_HAS_TRICORE

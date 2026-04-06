@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_MIPS
 //===- MipsDisassembler.cpp - Disassembler for Mips -------------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -1792,3 +1793,5 @@ static DecodeStatus DecodeSimm23Lsl2(MCInst *Inst, unsigned Insn,
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_MIPS

@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_ARM
 //===-- ARMInstPrinter.cpp - Convert ARM MCInst to assembly syntax --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -3362,3 +3363,5 @@ void ARM_addSysReg(MCInst *MI, arm_sysreg reg)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_ARM

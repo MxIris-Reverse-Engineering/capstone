@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SYSZ
 //===------ SystemZDisassembler.cpp - Disassembler for PowerPC ------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -482,3 +483,5 @@ void SystemZ_init(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_SYSZ

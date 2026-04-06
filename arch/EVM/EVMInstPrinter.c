@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_EVM
 /* Capstone Disassembly Engine */
 /* By Nguyen Anh Quynh, 2018 */
 
@@ -18,3 +19,5 @@ void EVM_printInst(MCInst *MI, struct SStream *O, void *PrinterInfo)
 		}
 	}
 }
+
+#endif // CAPSTONE_HAS_EVM

@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_X86
 /*===-- X86DisassemblerDecoder.c - Disassembler decoder ------------*- C -*-===*
  *
  *                     The LLVM Compiler Infrastructure
@@ -2358,3 +2359,5 @@ int decodeInstruction(struct InternalInstruction *insn,
 
 #endif
 
+
+#endif // CAPSTONE_HAS_X86

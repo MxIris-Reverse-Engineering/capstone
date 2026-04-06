@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SH
 /* Capstone Disassembly Engine */
 /* By Yoshinori Sato, 2022 */
 
@@ -2221,3 +2222,5 @@ void SH_reg_access(const cs_insn *insn,
 #endif
 
 
+
+#endif // CAPSTONE_HAS_SH

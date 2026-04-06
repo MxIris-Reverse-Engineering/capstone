@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_X86
 //===-- X86Disassembler.cpp - Disassembler for x86 and x86_64 -------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -1031,3 +1032,5 @@ bool X86_getInstruction(csh ud, const uint8_t *code, size_t code_len,
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_X86

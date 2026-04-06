@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_RISCV
 //===-- RISCVInstPrinter.cpp - Convert RISCV MCInst to asm syntax ---------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -445,3 +446,5 @@ static void printFRMArg(MCInst *MI, unsigned OpNo, SStream *O)
 }
   
 #endif				// CAPSTONE_HAS_RISCV
+
+#endif // CAPSTONE_HAS_RISCV

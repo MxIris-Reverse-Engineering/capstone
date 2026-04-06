@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_BPF
 /* Capstone Disassembly Engine */
 /* BPF Backend by david942j <david942j@gmail.com>, 2019 */
 
@@ -283,3 +284,5 @@ void BPF_printInst(MCInst *MI, struct SStream *O, void *PrinterInfo)
 	}
 #endif
 }
+
+#endif // CAPSTONE_HAS_BPF

@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_RISCV
 //===-- RISCVDisassembler.cpp - Disassembler for RISCV --------------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -431,3 +432,5 @@ void RISCV_init(MCRegisterInfo * MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_RISCV

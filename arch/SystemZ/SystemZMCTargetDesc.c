@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SYSZ
 //===-- SystemZMCTargetDesc.cpp - SystemZ target descriptions -------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -193,3 +194,5 @@ unsigned SystemZMC_getFirstReg(unsigned Reg)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_SYSZ

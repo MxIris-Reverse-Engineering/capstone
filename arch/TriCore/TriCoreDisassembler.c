@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_TRICORE
 //===------ TriCoreDisassembler.cpp - Disassembler for TriCore --*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -1653,3 +1654,5 @@ void TriCore_init_mri(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_TRICORE

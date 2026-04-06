@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_BPF
 /* Capstone Disassembly Engine */
 /* BPF Backend by david942j <david942j@gmail.com>, 2019 */
 
@@ -511,3 +512,5 @@ void BPF_reg_access(const cs_insn *insn,
 	sort_and_uniq(regs_read, read_count, regs_read_count);
 	sort_and_uniq(regs_write, write_count, regs_write_count);
 }
+
+#endif // CAPSTONE_HAS_BPF

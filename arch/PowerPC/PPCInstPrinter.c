@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_POWERPC
 //===-- PPCInstPrinter.cpp - Convert PPC MCInst to assembly syntax --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -1236,3 +1237,5 @@ static void op_addImm(MCInst *MI, int v)
 #include "PPCGenAsmWriter.inc"
 
 #endif
+
+#endif // CAPSTONE_HAS_POWERPC

@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_XCORE
 //===------ XCoreDisassembler.cpp - Disassembler for PowerPC ------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -792,3 +793,5 @@ void XCore_init(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_XCORE

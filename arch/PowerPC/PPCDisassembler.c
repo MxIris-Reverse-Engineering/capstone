@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_POWERPC
 //===------ PPCDisassembler.cpp - Disassembler for PowerPC ------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -625,3 +626,5 @@ void PPC_init(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_POWERPC

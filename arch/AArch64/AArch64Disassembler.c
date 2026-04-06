@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_ARM64
 //===- AArch64Disassembler.cpp - Disassembler for AArch64 ISA -------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -2278,3 +2279,5 @@ void AArch64_init(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_ARM64

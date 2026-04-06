@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_M680X
 /* Capstone Disassembly Engine */
 /* M680X Backend by Wolfgang Schwotzer <wolfgang.schwotzer@gmx.net> 2017 */
 
@@ -2305,3 +2306,5 @@ void M680X_reg_access(const cs_insn *insn,
 
 #endif
 
+
+#endif // CAPSTONE_HAS_M680X

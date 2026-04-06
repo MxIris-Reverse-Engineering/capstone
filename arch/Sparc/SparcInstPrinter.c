@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SPARC
 //===-- SparcInstPrinter.cpp - Convert Sparc MCInst to assembly syntax --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -444,3 +445,5 @@ void Sparc_addReg(MCInst *MI, int reg)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_SPARC

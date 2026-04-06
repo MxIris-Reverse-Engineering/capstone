@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_X86
 //===-- X86IntelInstPrinter.cpp - Intel assembly instruction printing -----===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -1059,3 +1060,5 @@ static void printanymem(MCInst *MI, unsigned OpNo, SStream *O)
 #include "X86GenRegisterName1.inc"
 
 #endif
+
+#endif // CAPSTONE_HAS_X86

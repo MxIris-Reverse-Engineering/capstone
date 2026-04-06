@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_WASM
 /* Capstone Disassembly Engine */
 /* By Spike, xwings  2019 */
 
@@ -45,3 +46,5 @@ void WASM_printInst(MCInst *MI, struct SStream *O, void *PrinterInfo)
 			break;
 	}
 }
+
+#endif // CAPSTONE_HAS_WASM

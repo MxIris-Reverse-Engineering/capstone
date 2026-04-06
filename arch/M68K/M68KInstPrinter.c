@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_M68K
 /* Capstone Disassembly Engine */
 /* M68K Backend by Daniel Collin <daniel@collin.com> 2015-2016 */
 
@@ -388,3 +389,5 @@ const char *M68K_group_name(csh handle, unsigned int id)
 #endif
 }
 
+
+#endif // CAPSTONE_HAS_M68K

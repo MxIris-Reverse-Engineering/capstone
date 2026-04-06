@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SYSZ
 //===-- SystemZInstPrinter.cpp - Convert SystemZ MCInst to assembly syntax --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -431,3 +432,5 @@ void SystemZ_printInst(MCInst *MI, SStream *O, void *Info)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_SYSZ

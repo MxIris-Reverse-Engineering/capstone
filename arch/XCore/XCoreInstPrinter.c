@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_XCORE
 //===-- XCoreInstPrinter.cpp - Convert XCore MCInst to assembly syntax --------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -248,3 +249,5 @@ void XCore_printInst(MCInst *MI, SStream *O, void *Info)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_XCORE

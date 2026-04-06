@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_MIPS
 //===-- MipsInstPrinter.cpp - Convert Mips MCInst to assembly syntax ------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -422,3 +423,5 @@ static void printRegisterList(MCInst *MI, int opNum, SStream *O)
 #include "MipsGenAsmWriter.inc"
 
 #endif
+
+#endif // CAPSTONE_HAS_MIPS

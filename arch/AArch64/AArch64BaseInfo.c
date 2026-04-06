@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_ARM64
 //===-- AArch64BaseInfo.cpp - AArch64 Base encoding information------------===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -75,3 +76,5 @@ void AArch64SysReg_genericRegisterString(uint32_t Bits, char *result)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_ARM64

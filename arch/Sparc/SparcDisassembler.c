@@ -1,3 +1,4 @@
+#ifdef CAPSTONE_HAS_SPARC
 //===------ SparcDisassembler.cpp - Disassembler for PowerPC ------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -498,3 +499,5 @@ void Sparc_init(MCRegisterInfo *MRI)
 }
 
 #endif
+
+#endif // CAPSTONE_HAS_SPARC
