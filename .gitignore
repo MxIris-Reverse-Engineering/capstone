@@ -135,3 +135,4 @@ cstool/cstool
 
 # android
 android-ndk-*
+.swiftpm
