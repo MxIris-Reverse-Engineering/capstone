@@ -659,8 +659,31 @@ void AArch64_printInst(MCInst *MI, SStream *O, void *Info)
 
 	mnem = printAliasInstr(MI, O, (MCRegisterInfo *)Info);
 	if (mnem) {
-		MCInst_setOpcodePub(MI, AArch64_map_insn(mnem));
+		unsigned int alias_id = AArch64_map_insn(mnem);
+		MCInst_setOpcodePub(MI, alias_id);
 		cs_mem_free(mnem);
+
+		// Fix-up: cmp/cmn/tst are XZR-destination aliases of SUBS/ADDS/ANDS.
+		// The alias print template skips MCInst operand 0 (Xd = XZR), but
+		// get_op_access() advances MI->ac_idx starting from 0 — so the
+		// "WRITE" entry of the underlying SUBS/ADDS/ANDS access table leaks
+		// onto the first visible operand. None of these aliases writes any
+		// explicit operand (NZCV is written implicitly and is already
+		// reported via AArch64MappingInsn.inc), so force every visible
+		// operand back to READ here.
+#ifndef CAPSTONE_DIET
+		if (MI->csh->detail) {
+			if (alias_id == ARM64_INS_CMP ||
+			    alias_id == ARM64_INS_CMN ||
+			    alias_id == ARM64_INS_TST) {
+				cs_arm64_op *ops = MI->flat_insn->detail->arm64.operands;
+				unsigned int op_count = MI->flat_insn->detail->arm64.op_count;
+				unsigned int i;
+				for (i = 0; i < op_count; i++)
+					ops[i].access = CS_AC_READ;
+			}
+		}
+#endif
 
 		switch(MCInst_getOpcode(MI)) {
 			default: break;
