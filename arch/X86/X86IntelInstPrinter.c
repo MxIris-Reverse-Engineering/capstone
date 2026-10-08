@@ -848,8 +848,12 @@ void X86_Intel_printInst(MCInst *MI, SStream *O, void *Info)
 #ifndef CAPSTONE_DIET
 		get_op_access(MI->csh, MCInst_getOpcode(MI), access,
 			      &MI->flat_insn->detail->x86.eflags);
-		MI->flat_insn->detail->x86.operands[0].access = access[0];
-		MI->flat_insn->detail->x86.operands[1].access = access[1];
+		for (uint8_t i = 0; i < MI->flat_insn->detail->x86.op_count &&
+				    i < ARR_SIZE(access);
+		     i++) {
+			MI->flat_insn->detail->x86.operands[i].access =
+				access[i];
+		}
 #endif
 	}
 
@@ -1215,8 +1219,8 @@ static void printMemReference(MCInst *MI, unsigned Op, SStream *O)
 					MI->op1_size = 8;
 				if (DispVal < 0) {
 					printImm(MI, O,
-						 arch_masks[x86_get_bit_mode(
-							 MI->csh->mode)] &
+						 x86_get_address_mask(
+							 MI->csh->mode) &
 							 DispVal,
 						 true);
 				} else {
