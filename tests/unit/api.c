@@ -41,9 +41,39 @@ static bool test_cs_mem_setup_fail()
 	return true;
 }
 
+static bool test_cs_option_detail_off()
+{
+	printf("Test test_cs_option_detail_off\n");
+#ifdef CAPSTONE_HAS_AARCH64
+	// add x2, x3, x4
+	const uint8_t code[] = { 0x62, 0x00, 0x04, 0x8b };
+	csh handle;
+	cs_insn *instruction;
+	size_t count;
+
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_open(CS_ARCH_AARCH64,
+						  CS_MODE_LITTLE_ENDIAN,
+						  &handle),
+				  CS_ERR_OK);
+	CHECK_INT_EQUAL_RET_FALSE(
+		(size_t)cs_option(handle, CS_OPT_DETAIL, CS_OPT_ON), CS_ERR_OK);
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_option(handle, CS_OPT_DETAIL,
+						    CS_OPT_OFF),
+				  CS_ERR_OK);
+	count = cs_disasm(handle, code, sizeof(code), 0x1000, 0, &instruction);
+	CHECK_INT_EQUAL_RET_FALSE(count, 1);
+	CHECK_NULL_RET_FALSE(instruction->detail);
+	cs_free(instruction, count);
+	cs_close(&handle);
+#endif
+	return true;
+}
+
 int main()
 {
 	bool result = true;
+	result &= test_cs_option_detail_off();
+	// Leaves the global allocator unusable, so it has to run last.
 	result &= test_cs_mem_setup_fail();
 
 	if (result) {
