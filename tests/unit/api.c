@@ -69,10 +69,46 @@ static bool test_cs_option_detail_off()
 	return true;
 }
 
+static bool test_cs_disasm_iter_clears_illegal()
+{
+	printf("Test test_cs_disasm_iter_clears_illegal\n");
+#ifdef CAPSTONE_HAS_AARCH64
+	// ldr x1, [x1, #8]! writes back into its own transfer register, which the
+	// architecture leaves unpredictable; ldr x0, [x1, #8]! does not.
+	const uint8_t code[] = { 0x21, 0x8c, 0x40, 0xf8, 0x20, 0x8c, 0x40, 0xf8 };
+	const uint8_t *position = code;
+	size_t remaining = sizeof(code);
+	uint64_t address = 0x1000;
+	csh handle;
+	cs_insn *instruction;
+
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_open(CS_ARCH_AARCH64,
+						  CS_MODE_LITTLE_ENDIAN,
+						  &handle),
+				  CS_ERR_OK);
+	instruction = cs_malloc(handle);
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_disasm_iter(handle, &position,
+							 &remaining, &address,
+							 instruction),
+				  true);
+	CHECK_INT_EQUAL_RET_FALSE((size_t)instruction->illegal, true);
+	// The same buffer again: nothing of the first instruction may remain.
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_disasm_iter(handle, &position,
+							 &remaining, &address,
+							 instruction),
+				  true);
+	CHECK_INT_EQUAL_RET_FALSE((size_t)instruction->illegal, false);
+	cs_free(instruction, 1);
+	cs_close(&handle);
+#endif
+	return true;
+}
+
 int main()
 {
 	bool result = true;
 	result &= test_cs_option_detail_off();
+	result &= test_cs_disasm_iter_clears_illegal();
 	// Leaves the global allocator unusable, so it has to run last.
 	result &= test_cs_mem_setup_fail();
 

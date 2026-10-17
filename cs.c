@@ -1558,6 +1558,13 @@ bool CAPSTONE_API cs_disasm_iter(csh ud, const uint8_t **code, size_t *size,
 	// save all the information for non-detailed mode
 	mci.flat_insn = insn;
 	mci.flat_insn->address = *address;
+	// @insn still holds the previous instruction. These are set only when an
+	// instruction has them, so clear them as cs_disasm()'s zeroed memory does:
+	// otherwise one illegal instruction marks every later one illegal.
+	mci.flat_insn->illegal = false;
+	mci.flat_insn->is_alias = false;
+	mci.flat_insn->alias_id = 0;
+	mci.flat_insn->usesAliasDetails = false;
 #ifdef CAPSTONE_DIET
 	// zero out mnemonic & op_str
 	mci.flat_insn->mnemonic[0] = '\0';
