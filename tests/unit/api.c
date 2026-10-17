@@ -104,11 +104,42 @@ static bool test_cs_disasm_iter_clears_illegal()
 	return true;
 }
 
+static bool test_cs_option_mnemonic_keeps_aliases()
+{
+	printf("Test test_cs_option_mnemonic_keeps_aliases\n");
+#ifdef CAPSTONE_HAS_AARCH64
+	// orr x0, x1, x2, then mov x0, x1: an alias of orr x0, xzr, x1.
+	const uint8_t code[] = { 0x20, 0x00, 0x02, 0xaa, 0xe0, 0x03, 0x01, 0xaa };
+	cs_opt_mnem customization = { AARCH64_INS_ORR, "or" };
+	csh handle;
+	cs_insn *instructions;
+	size_t count;
+
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_open(CS_ARCH_AARCH64,
+						  CS_MODE_LITTLE_ENDIAN,
+						  &handle),
+				  CS_ERR_OK);
+	CHECK_INT_EQUAL_RET_FALSE((size_t)cs_option(handle, CS_OPT_MNEMONIC,
+						    (size_t)&customization),
+				  CS_ERR_OK);
+	count = cs_disasm(handle, code, sizeof(code), 0x1000, 0, &instructions);
+	CHECK_INT_EQUAL_RET_FALSE(count, 2);
+	CHECK_STR_EQUAL_RET_FALSE(instructions[0].mnemonic, "or");
+	// The alias is printed under a name of its own, which the customization
+	// of orr must leave alone.
+	CHECK_STR_EQUAL_RET_FALSE(instructions[1].mnemonic, "mov");
+	cs_free(instructions, count);
+	cs_close(&handle);
+#endif
+	return true;
+}
+
 int main()
 {
 	bool result = true;
 	result &= test_cs_option_detail_off();
 	result &= test_cs_disasm_iter_clears_illegal();
+	result &= test_cs_option_mnemonic_keeps_aliases();
 	// Leaves the global allocator unusable, so it has to run last.
 	result &= test_cs_mem_setup_fail();
 

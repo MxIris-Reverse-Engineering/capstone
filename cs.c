@@ -906,6 +906,13 @@ static int str_replace(char *result, char *target, const char *str1, char *str2)
 		return -1;
 	}
 
+	// An alias is printed under a name of its own, which need not start with
+	// str1: replacing as many characters regardless turned AArch64's mov, an
+	// alias of orr, into "or" for a customized orr.
+	if (strncmp(target, str1, str1_len) != 0) {
+		return -1;
+	}
+
 	// only perform replacement if the output fits into result
 	if (target_len - str1_len + strlen(str2) <= CS_MNEMONIC_SIZE - 1) {
 		// copy str2 to beginning of result
